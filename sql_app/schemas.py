@@ -8,16 +8,15 @@ class APIBase(BaseModel):
     docs_url: str | None = None
     tags: str | None = None
     status: bool = False
-    response: int | None = None
+    response_code: int | None = None
     last_downtime: datetime | None = None
 
 class APICreate(APIBase):
     pass
 
-
 class API(APIBase):
-    id: int
-    user_id: str
+    api_id: int
+    user_id: int
 
     class Config:
         orm_mode = True

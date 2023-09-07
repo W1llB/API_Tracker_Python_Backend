@@ -14,7 +14,7 @@ class User(Base):
 class API(Base):
     __tablename__ = "apis"
 
-    id = Column(Integer, primary_key=True, index=True)
+    api_id = Column(Integer, primary_key=True, index=True)
     user_id = Column(String, ForeignKey("users.id"))
     name = Column(String, index=True)
     endpoint_url = Column(String)

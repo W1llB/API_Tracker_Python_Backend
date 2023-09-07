@@ -28,7 +28,7 @@ def get_apis(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_user_api(db: Session, api: schemas.APICreate, user_id: int):
-    db_api = models.API(**api.dict(), owner_id=user_id)
+    db_api = models.API(**api.dict(), user_id=user_id)
     db.add(db_api)
     db.commit()
     db.refresh(db_api)

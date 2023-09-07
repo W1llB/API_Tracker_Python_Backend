@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from routers import apis
 from sql_app import models
-from sql_app.database import SessionLocal, engine
+from sql_app.database import engine
 from fastapi.middleware import Middleware
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -23,9 +23,6 @@ middleware = [
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(middleware=middleware)
-
-
-
 
 app.include_router(apis.router)
 
