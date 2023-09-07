@@ -3,19 +3,26 @@ from sqlalchemy.orm import relationship
 
 from .database import Base
 
+class User(Base):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+
+    apis = relationship("API", back_populates="owner")
 
 class API(Base):
     __tablename__ = "apis"
 
-    api_id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String, index=True)
-    api_name = Column(String)
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(String, ForeignKey("users.id"))
+    name = Column(String, index=True)
     endpoint_url = Column(String)
     docs_url = Column(String)
-    tags = Column(String)
-    status = Column(Boolean)
-    response_code = Column(Integer)
-    last_downtime = Column(Date)
+    tags = Column(String, index=True)
+    status = Column(Boolean, index=True)
+    response_code = Column(Integer, index=True)
+    last_downtime = Column(Date, index=True)
 
-    items = relationship("Item", back_populates="owner")
+    owner = relationship("User", back_populates="apis")
 
